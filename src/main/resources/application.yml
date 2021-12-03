@@ -1,0 +1,25 @@
+server:
+  port: 8085
+
+credentials:
+  google:
+    clientId: 633174694466-imbru6hh99a4jht3t8986cmf55kicl6u.apps.googleusercontent.com
+
+users:
+  load: true
+
+logging:
+  level:
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
