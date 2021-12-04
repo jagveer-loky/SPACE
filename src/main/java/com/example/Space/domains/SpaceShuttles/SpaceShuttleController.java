@@ -34,6 +34,7 @@ public class SpaceShuttleController {
     public ResponseEntity<SpaceShuttle> createSpaceShuttle(
             @RequestBody SpaceShuttle spaceShuttle){
         logger.info("Request recieved for createSpaceShuttle");
+        logger.info(spaceShuttle);
         return new ResponseEntity<>(spaceShuttleService.createSpaceShuttle(spaceShuttle), HttpStatus.CREATED);
     }
 }
