@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +22,8 @@ public class SpaceShuttleController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<SpaceShuttle>> getSpaceShuttle(
-            @RequestParam(required = false)MultiValueMap<String, String> params) {
-        logger.info("request received for getSpaceShuttle");
-        SpaceShuttle spaceShuttle = new SpaceShuttle();
-        return new ResponseEntity<>(spaceShuttleService.getSpaceShuttle(spaceShuttle), HttpStatus.OK);
+    public List<SpaceShuttle> getSpaceShuttle() {
+        return spaceShuttleService.getSpaceShuttle();
     }
     @PostMapping()
     @ResponseBody

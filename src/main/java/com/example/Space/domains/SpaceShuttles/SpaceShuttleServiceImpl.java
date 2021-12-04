@@ -20,7 +20,7 @@ public class SpaceShuttleServiceImpl implements SpaceShuttleService {
         this.spaceShuttleRepository = spaceShuttleRepository;
     }
 
-    public List<SpaceShuttle> getSpaceShuttle(SpaceShuttle spaceShuttle) {
+    public List<SpaceShuttle> getSpaceShuttle() {
         try {
             return spaceShuttleRepository.findAll();
         } catch (DataAccessException dae) {
