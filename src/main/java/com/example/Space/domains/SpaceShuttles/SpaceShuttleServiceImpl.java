@@ -20,6 +20,12 @@ public class SpaceShuttleServiceImpl implements SpaceShuttleService {
         this.spaceShuttleRepository = spaceShuttleRepository;
     }
 
+    /**
+     * gets a list of all Space Shuttles.
+     * Catches and exception if there is any.
+     *
+     * @return List of SpaceShuttles
+     */
     public List<SpaceShuttle> getSpaceShuttle() {
         try {
             return spaceShuttleRepository.findAll();
@@ -29,6 +35,12 @@ public class SpaceShuttleServiceImpl implements SpaceShuttleService {
         }
     }
 
+    /**
+     * Creates a spaceShuttle, catches an excpetion if creating goes wrong.
+     *
+     * @param spaceShuttle
+     * @return SpaceShuttle
+     */
     public SpaceShuttle createSpaceShuttle(SpaceShuttle spaceShuttle) {
         try {
             logger.info("Saved SpaceShuttle");
