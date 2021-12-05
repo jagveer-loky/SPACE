@@ -16,12 +16,13 @@ import org.springframework.web.context.WebApplicationContext;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.doNothing;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -102,5 +103,41 @@ public class SpaceShuttleControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(spaceShuttle)))
                 .andExpect(status().isCreated());
+    }
+    @Test
+    public void shouldFetchSpaceShuttleByID() throws Exception {
+        final Long spaceid = 3L;
+        final SpaceShuttle spaceShuttle = new SpaceShuttle( true, "Danny", "Danny's first trip",
+                BigDecimal.valueOf(3), null);
+        given(spaceShuttleService.getSpaceShuttleById(spaceid)).willReturn(spaceShuttle);
+
+        this.mockMvc.perform(get("/SpaceShuttle/{id}", spaceid))
+                .andExpect(status().isOk());
+    }
+    @Test
+    public void shouldDelteSpaceShuttle() throws Exception{
+        Long spaceId = 1L;
+        SpaceShuttle spaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
+                BigDecimal.valueOf(3), null);
+        spaceShuttle.setId(spaceId);
+        given(spaceShuttleService.getSpaceShuttleById(spaceId)).willReturn(spaceShuttle);
+
+
+        this.mockMvc.perform(delete("/SpaceShuttle/{id}", spaceShuttle.getId()))
+                .andExpect(status().isOk());
+    }
+    @Test
+    public void shouldUpdateSpaceShuttle() throws Exception{
+        Long spaceId = 1L;
+        SpaceShuttle spaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
+                BigDecimal.valueOf(3), null);
+        spaceShuttle.setId(spaceId);
+        given(spaceShuttleService.getSpaceShuttleById(spaceId)).willReturn(spaceShuttle);
+        given(spaceShuttleService.updateSpaceShuttle(any(SpaceShuttle.class))).willAnswer((invocation) -> invocation.getArgument(0));
+
+        this.mockMvc.perform(put("/SpaceShuttle", spaceShuttle.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(spaceShuttle)))
+                .andExpect(status().isOk());
     }
 }

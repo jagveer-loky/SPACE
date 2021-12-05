@@ -45,4 +45,34 @@ public class SpaceShuttleController {
         logger.info(spaceShuttle);
         return new ResponseEntity<>(spaceShuttleService.createSpaceShuttle(spaceShuttle), HttpStatus.CREATED);
     }
+
+    /**
+     * Retrieves the spaceshuttle with the rpovided id from the database.
+     * @param id -id of the spaceshuttle to receive
+     * @return the spaceShuttle
+     */
+    @GetMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity<SpaceShuttle> getSpaceShuttleById (@PathVariable Long id){
+        logger.info("Request recieved for getSpaceShuttleById" + id);
+        return new ResponseEntity<>(spaceShuttleService.getSpaceShuttleById(id), HttpStatus.OK);
+    }
+
+    /**
+     * Deletes the spaceshuttle with the privided id from the database.
+     * @param id - of the sapce shuttle to delte.
+     * @return responseentity
+     */
+    @DeleteMapping(value = "{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity deleteSpaceShuttle(@PathVariable Long id){
+        logger.info("Request received for DeleteSpaceShuttleById");
+        return spaceShuttleService.deleteSpaceShuttle(id);
+    }
+    @PutMapping()
+    public ResponseEntity<SpaceShuttle> updateSpaceShuttle(@RequestBody SpaceShuttle spaceShuttle){
+        logger.info("Request to update SpaceShuttle");
+        logger.info(spaceShuttle);
+        return new ResponseEntity<>(spaceShuttleService.updateSpaceShuttle(spaceShuttle), HttpStatus.OK);
+    }
 }
