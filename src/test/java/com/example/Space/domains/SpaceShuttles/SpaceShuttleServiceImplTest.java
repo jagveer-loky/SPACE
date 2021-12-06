@@ -177,5 +177,28 @@ public class SpaceShuttleServiceImplTest {
         });
         assertThrows(ServerError.class, () -> spaceShuttleServiceImpl.updateSpaceShuttle(testSpaceShuttle));
     }
+    @Test
+    public void sadupdateSpaceShuttle() {
+        SpaceShuttle testSpaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
+            BigDecimal.valueOf(3), null);
+        testSpaceShuttle.setId(2L);
+        SpaceShuttle saveSpaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
+            BigDecimal.valueOf(3), null);
+        saveSpaceShuttle.setId(2L);
+        when(spaceShuttleRepository.findById(2L)).thenThrow(new DataAccessException("wow") {
+        });
+        when(spaceShuttleRepository.save(testSpaceShuttle)).thenReturn(saveSpaceShuttle);
+        assertThrows(ServerError.class, () -> spaceShuttleServiceImpl.updateSpaceShuttle(testSpaceShuttle));
+    }
+    @Test
+    public void updateUser2() {
+        SpaceShuttle testSpaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
+            BigDecimal.valueOf(3), null);
+        testSpaceShuttle.setId(null);
+        SpaceShuttle saveSpaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
+            BigDecimal.valueOf(3), null);
+        saveSpaceShuttle.setId(null);
+        assertThrows(ResourceNotFound.class, () -> spaceShuttleServiceImpl.updateSpaceShuttle(testSpaceShuttle));
+    }
 
 }
