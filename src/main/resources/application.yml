@@ -5,7 +5,7 @@ credentials:
   google:
     clientId: 633174694466-imbru6hh99a4jht3t8986cmf55kicl6u.apps.googleusercontent.com
 
-users:
+spaceshuttle:
   load: true
 
 logging:

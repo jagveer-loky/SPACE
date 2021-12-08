@@ -58,34 +58,6 @@ public class SpaceShuttleControllerTest {
                 BigDecimal.valueOf(3), null));
     }
 
-
-    //  @Test
-//  public void saveSpaceShuttle() throws Exception {
-//    ObjectMapper mapper = new ObjectMapper();
-//    SpaceShuttle spaceShuttle = new SpaceShuttle(true, "Danny", "Danny's first trip",
-//        BigDecimal.valueOf(3), null);
-//
-//    String myClassAsJsonString = mapper.writeValueAsString(spaceShuttle);
-//    System.out.println(myClassAsJsonString);
-//    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
-//            .post("/SpaceShuttle")
-//            .content(myClassAsJsonString)
-//            .contentType(MediaType.APPLICATION_JSON)
-//            .accept(MediaType.APPLICATION_JSON))
-//        .andReturn();
-//    int status = mvcResult.getResponse().getStatus();
-//    assertEquals(201, status);
-//  }
-//  @Test
-//  public void getSpaceShuttles() throws Exception {
-//    String uri = "/SpaceShuttle";
-//    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
-//        .get(uri)
-//        .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-//
-//    int status = mvcResult.getResponse().getStatus();
-//    assertEquals(200, status);
-//  }
     @Test
     public void getAllSpaceShuttle() throws Exception {
         given(spaceShuttleService.getSpaceShuttle()).willReturn(spaceShuttle);
